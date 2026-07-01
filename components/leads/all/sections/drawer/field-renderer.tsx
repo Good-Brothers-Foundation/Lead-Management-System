@@ -30,7 +30,7 @@ export function FieldRenderer({
         renderCustomEdit || (
           <Input
             name={name}
-            value={value}
+            value={value ?? ""}
             onChange={onChange}
             className="h-10 bg-card border-input"
           />

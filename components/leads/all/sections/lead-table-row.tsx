@@ -29,7 +29,8 @@ interface LeadTableRowProps {
 }
 
 export const getStatusStyles = (status: string) => {
-  switch (status) {
+  const normalized = (status || "").trim().toLowerCase();
+  switch (normalized) {
     case "new":
       return {
         bg: "bg-blue-500/10 text-blue-600 border-blue-500/20",
@@ -61,7 +62,10 @@ export const getStatusStyles = (status: string) => {
         label: "Unqualified",
       };
     default:
-      return { bg: "bg-muted text-muted-foreground", label: status };
+      return {
+        bg: "bg-blue-500/10 text-blue-600 border-blue-500/20",
+        label: "New",
+      };
   }
 };
 

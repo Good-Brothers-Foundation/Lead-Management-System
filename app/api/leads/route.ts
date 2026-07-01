@@ -9,6 +9,17 @@ export async function GET(req: NextRequest) {
   try {
     await connectDB();
 
+    // Self-healing migration: Convert any invalid or missing statuses (like "—", null, or empty strings) to "new"
+    await Lead.updateMany(
+      {
+        $or: [
+          { status: { $in: ["—", "", null] } },
+          { status: { $exists: false } }
+        ]
+      } as any,
+      { $set: { status: "new" } }
+    );
+
     const { searchParams } = new URL(req.url);
 
     // Read all filter params
@@ -185,6 +196,17 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     if (body.source && body.source.trim().toLowerCase() === "google") {
       body.source = "google-maps";
+    }
+
+    if (!body.status || body.status.trim() === "" || body.status === "—") {
+      body.status = "new";
+    } else {
+      const lower = body.status.trim().toLowerCase();
+      if (["new", "contacted", "qualified", "proposal", "converted", "unqualified"].includes(lower)) {
+        body.status = lower;
+      } else {
+        body.status = "new";
+      }
     }
 
     const { fullName, phone, gmbLink, address } = body;

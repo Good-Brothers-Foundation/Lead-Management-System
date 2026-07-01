@@ -9,8 +9,13 @@ const getLocalDateString = (date: Date): string => {
 
 export const todayString = () => getLocalDateString(new Date());
 
-export const normalizeStatus = (status?: string) =>
-  status?.trim().toLowerCase() || "new";
+export const normalizeStatus = (status?: string) => {
+  const s = status?.trim().toLowerCase();
+  if (!s || s === "—" || !["new", "contacted", "qualified", "proposal", "converted", "unqualified"].includes(s)) {
+    return "new";
+  }
+  return s;
+};
 
 export const getStatusCounts = (leads: LeadFormData[]) =>
   leads.reduce<Record<string, number>>((counts, lead) => {

@@ -29,6 +29,17 @@ export async function POST(req: NextRequest) {
       if (leadData.source && leadData.source.trim().toLowerCase() === "google") {
         leadData.source = "google-maps";
       }
+
+      if (!leadData.status || leadData.status.trim() === "" || leadData.status === "—") {
+        leadData.status = "new";
+      } else {
+        const lower = leadData.status.trim().toLowerCase();
+        if (["new", "contacted", "qualified", "proposal", "converted", "unqualified"].includes(lower)) {
+          leadData.status = lower;
+        } else {
+          leadData.status = "new";
+        }
+      }
       const { fullName, phone, gmbLink, address } = leadData;
 
       // Minimal required validation check

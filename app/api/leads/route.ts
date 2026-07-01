@@ -20,6 +20,17 @@ export async function GET(req: NextRequest) {
       { $set: { status: "new" } }
     );
 
+    // Self-healing migration: Convert any missing or empty sources to "google-maps"
+    await Lead.updateMany(
+      {
+        $or: [
+          { source: { $in: ["", null] } },
+          { source: { $exists: false } }
+        ]
+      } as any,
+      { $set: { source: "google-maps" } }
+    );
+
     const { searchParams } = new URL(req.url);
 
     // Read all filter params

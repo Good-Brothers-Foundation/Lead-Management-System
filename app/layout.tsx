@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { AuthProvider } from "@/lib/auth/AuthContext";
 import { AuthGuard } from "@/lib/auth/AuthGuard";
 import { RealtimeProvider } from "@/components/providers/RealtimeProvider";
+import { Analytics } from "@vercel/analytics/next";
 
 const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -41,6 +42,7 @@ export default function RootLayout({
             </RealtimeProvider>
           </AuthGuard>
         </AuthProvider>
+        <Analytics />
       </body>
     </html>
   );

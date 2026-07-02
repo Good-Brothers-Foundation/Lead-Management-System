@@ -4,7 +4,6 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/ui/AppSidebar";
 import { NotificationCenter } from "@/components/ui/NotificationCenter";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
-import { Analytics } from "@vercel/analytics/next"
 
 export const metadata: Metadata = {
   title: "Lead Management System",
@@ -35,8 +34,6 @@ export default function AppLayout({
         </div>
       </SidebarProvider>
     </TooltipProvider>
-                <Analytics />
-
     </>
   );
 }

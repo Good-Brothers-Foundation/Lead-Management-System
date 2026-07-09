@@ -1,4 +1,4 @@
-import { CheckSquare, LayoutDashboard, Phone, Users } from "lucide-react";
+import { CheckSquare, LayoutDashboard, Phone, Users, Megaphone } from "lucide-react";
 
 export const SlideBarMenuItems = [
   {
@@ -86,6 +86,19 @@ export const SlideBarMenuItems = [
         title: "Task Board",
         id: "task-board-tab",
         href: "/team/tasks",
+      },
+    ],
+  },
+  {
+    title: "Outreach",
+    id: "outreach-tab",
+    icon: Megaphone,
+    defaultOpen: true,
+    items: [
+      {
+        title: "Broadcast",
+        id: "broadcast-tab",
+        href: "/broadcast",
       },
     ],
   },

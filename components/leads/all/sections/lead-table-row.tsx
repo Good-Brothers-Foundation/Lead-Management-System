@@ -47,19 +47,59 @@ export const getStatusStyles = (status: string) => {
         label: "Qualified",
       };
     case "proposal":
+    case "proposal-sent":
       return {
         bg: "bg-purple-500/10 text-purple-600 border-purple-500/20",
         label: "Proposal Sent",
       };
     case "converted":
+    case "won":
       return {
         bg: "bg-emerald-500/10 text-emerald-600 border-emerald-500/20",
         label: "Converted",
       };
     case "unqualified":
+    case "closed-lost":
+    case "lost":
       return {
         bg: "bg-rose-500/10 text-rose-600 border-rose-500/20",
-        label: "Unqualified",
+        label: "Closed Lost",
+      };
+    case "follow-up-1":
+    case "fu1":
+      return {
+        bg: "bg-amber-500/10 text-amber-700 border-amber-500/20",
+        label: "Follow-up 1",
+      };
+    case "follow-up-2":
+    case "fu2":
+      return {
+        bg: "bg-amber-500/10 text-amber-800 border-amber-500/30",
+        label: "Follow-up 2",
+      };
+    case "follow-up-3":
+    case "fu3":
+      return {
+        bg: "bg-amber-500/10 text-amber-900 border-amber-500/40",
+        label: "Follow-up 3",
+      };
+    case "quotation":
+    case "quotation-sent":
+      return {
+        bg: "bg-violet-500/10 text-violet-600 border-violet-500/20",
+        label: "Quotation Sent",
+      };
+    case "meeting":
+    case "meeting-booked":
+      return {
+        bg: "bg-cyan-500/10 text-cyan-600 border-cyan-500/20",
+        label: "Meeting Booked",
+      };
+    case "payment":
+    case "payment-received":
+      return {
+        bg: "bg-emerald-500/10 text-emerald-700 border-emerald-500/20",
+        label: "Payment",
       };
     default:
       return {

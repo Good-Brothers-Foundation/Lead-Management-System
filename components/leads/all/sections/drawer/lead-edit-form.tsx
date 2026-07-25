@@ -112,11 +112,27 @@ export function LeadEditForm({ editData, onChange, onSelectChange }: LeadEditFor
         </h3>
         <div className="grid gap-6 md:grid-cols-2">
           <FieldRenderer 
-            label="Full Name *" 
+            label="Contact Name *" 
             name="fullName" 
             value={editData.fullName} 
             isEditing 
             onChange={onChange} 
+          />
+          <FieldRenderer 
+            label="Business Name" 
+            name="businessName" 
+            value={editData.businessName || ""} 
+            isEditing 
+            onChange={onChange} 
+            renderCustomEdit={
+              <input 
+                name="businessName" 
+                placeholder="e.g. Acme Corp, Tech Solutions Ltd" 
+                value={editData.businessName || ""} 
+                onChange={onChange} 
+                className="h-10 w-full bg-card border border-input rounded-md px-3 text-sm focus-visible:ring-1 focus-visible:outline-none" 
+              />
+            }
           />
           <FieldRenderer 
             label="Category" 
@@ -202,6 +218,27 @@ export function LeadEditForm({ editData, onChange, onSelectChange }: LeadEditFor
         </h3>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           
+          <FieldRenderer
+            label="Lead Type"
+            name="leadType"
+            value={editData.leadType || ""}
+            isEditing
+            onChange={onChange}
+            renderCustomEdit={
+              <Select onValueChange={(v) => onSelectChange("leadType", v)} value={editData.leadType}>
+                <SelectTrigger className="h-10 bg-card"><SelectValue placeholder="Select Lead Type" /></SelectTrigger>
+                <SelectContent position="popper">
+                  <SelectItem value="b2b">B2B</SelectItem>
+                  <SelectItem value="b2c">B2C</SelectItem>
+                  <SelectItem value="individual">Individual</SelectItem>
+                  <SelectItem value="government">Government</SelectItem>
+                  <SelectItem value="ngo">NGO / Non-Profit</SelectItem>
+                  <SelectItem value="other">Other</SelectItem>
+                </SelectContent>
+              </Select>
+            }
+          />
+
           <FieldRenderer
             label="Service Interested In"
             name="service"

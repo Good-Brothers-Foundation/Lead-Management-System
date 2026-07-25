@@ -22,6 +22,7 @@ import { generateTrendData, getCountsByField } from "@/lib/utils";
 import { MetricCard } from "./sections/MetricCard";
 import { ChartCard } from "./sections/ChartCard";
 import { FollowUpRow } from "./sections/FollowUpRow";
+import { TeamScoreboard } from "./sections/TeamScoreboard";
 import { RECHARTS_PALETTE, STATUS_COLORS } from "@/lib/data/dashboard.color";
 
 const TOOLTIP_STYLE = {
@@ -356,9 +357,20 @@ export default function AnalyticsDashboard() {
         </div>
       </section>
 
-      {/* ── ROW 4: FUNNEL + TEAM WORKLOAD ── */}
+      {/* ── ROW 4: TEAM SCOREBOARD ── */}
       <section className="space-y-4">
-        <SectionHeading>Conversion Funnel & Team</SectionHeading>
+        <SectionHeading>🏆 Team Scoreboard</SectionHeading>
+        <ChartCard
+          title="Performance Leaderboard"
+           description="Ranked by weighted pipeline score · Won=20pts · Proposal=10pts · Qualified=7pts · Contacted=3pts · New=1pt (sheet aliases like Follow-up, Meeting Booked, Quotation Sent are auto-mapped)"
+        >
+          <TeamScoreboard leads={leads} tasks={tasks} />
+        </ChartCard>
+      </section>
+
+      {/* ── CONVERSION FUNNEL & TEAM WORKLOAD ── */}
+      <section className="space-y-4">
+        <SectionHeading>Conversion Funnel &amp; Team Workload</SectionHeading>
         <div className="grid gap-6 lg:grid-cols-2">
 
           {/* Conversion Funnel */}

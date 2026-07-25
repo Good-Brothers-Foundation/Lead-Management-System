@@ -212,11 +212,16 @@ export async function POST(req: NextRequest) {
     if (!body.status || body.status.trim() === "" || body.status === "—") {
       body.status = "new";
     } else {
+      // Normalize to a canonical kebab/slug form so duplicate detection and
+      // filter dropdowns work consistently. Custom values (e.g. "Closed Lost",
+      // "Quotation Sent") are slugged rather than silently dropped to "new".
       const lower = body.status.trim().toLowerCase();
       if (["new", "contacted", "qualified", "proposal", "converted", "unqualified"].includes(lower)) {
         body.status = lower;
       } else {
-        body.status = "new";
+        body.status = lower
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/^-+|-+$/g, "");
       }
     }
 

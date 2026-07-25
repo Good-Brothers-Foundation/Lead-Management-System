@@ -16,12 +16,12 @@ export default function PersonalInfoSection({
       {/* Core Personal Info */}
       <div className="space-y-6">
         <h3 className="text-md font-semibold tracking-wide uppercase text-muted-foreground/80 border-b border-border pb-2">
-          Personal Informationx
+          Personal Information
         </h3>
         <div className="grid gap-x-6 gap-y-4 md:grid-cols-2">
           <div className="space-y-2">
             <Label htmlFor="fullName" className="text-sm font-medium">
-              Full Name / Business Name *
+              Contact Name *
             </Label>
             <Input
               id="fullName"
@@ -29,6 +29,19 @@ export default function PersonalInfoSection({
               value={formData.fullName || ""}
               onChange={onChange}
               required
+              className="h-10 bg-card border-input focus-visible:ring-1"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="businessName" className="text-sm font-medium">
+              Business Name
+            </Label>
+            <Input
+              id="businessName"
+              name="businessName"
+              value={formData.businessName || ""}
+              onChange={onChange}
               className="h-10 bg-card border-input focus-visible:ring-1"
             />
           </div>

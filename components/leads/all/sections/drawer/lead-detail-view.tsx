@@ -102,6 +102,11 @@ export function LeadDetailView({ lead }: LeadDetailViewProps) {
             <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground px-2 py-0.5 rounded bg-muted">
               {lead.category || "Individual Account"}
             </span>
+            {lead.leadType && (
+              <span className="text-xs font-bold uppercase tracking-wider text-blue-600 px-2 py-0.5 rounded bg-blue-500/10 border border-blue-500/20">
+                {lead.leadType.toUpperCase()}
+              </span>
+            )}
             {lead.rating && (
               <div className="flex items-center gap-1 text-amber-500 font-semibold text-xs bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">
                 <Star className="h-3.5 w-3.5 fill-amber-500" />
@@ -110,8 +115,11 @@ export function LeadDetailView({ lead }: LeadDetailViewProps) {
             )}
           </div>
           <h2 className="text-xl sm:text-2xl font-bold text-foreground tracking-tight">
-            {lead.fullName}
+            {lead.businessName || lead.fullName}
           </h2>
+          {lead.businessName && lead.fullName && (
+            <p className="text-xs text-muted-foreground font-medium">Contact: {lead.fullName}</p>
+          )}
           {lead.address && (
             <p className="text-xs text-muted-foreground inline-flex items-center gap-1">
               <MapPin className="h-3.5 w-3.5 text-muted-foreground/75" />

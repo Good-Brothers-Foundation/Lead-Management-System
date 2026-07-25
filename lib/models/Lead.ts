@@ -2,6 +2,8 @@ import mongoose, { Schema, Document, Model } from "mongoose";
 
 export interface LeadDocument extends Document {
   fullName: string;
+  businessName?: string;
+  leadType?: string;
   phone?: string;
   emails?: string[];
   address?: string;
@@ -43,6 +45,8 @@ export interface LeadDocument extends Document {
 const leadSchema: Schema<LeadDocument> = new Schema(
   {
     fullName: { type: String, required: true, trim: true },
+    businessName: { type: String, trim: true },
+    leadType: { type: String, trim: true },
     phone: { type: String, trim: true },
     emails: [{ type: String, trim: true, lowercase: true }],
     address: { type: String, trim: true },

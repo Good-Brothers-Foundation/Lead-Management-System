@@ -20,6 +20,7 @@ import {
   Mail,
   Eye,
   MapPin,
+  FileSpreadsheet,
 } from "lucide-react";
 import Image from "next/image";
 import { LeadFormData } from "@/lib/types/lead";
@@ -34,6 +35,7 @@ import {
 import { WhatsAppTemplateModal } from "./sections/WhatsAppTemplateModal";
 import { LeadKanbanBoard } from "./sections/LeadKanbanBoard";
 import { formatLabel } from "@/lib/lead-insights";
+import { GoogleSheetSyncModal } from "./sections/GoogleSheetSyncModal";
 
 // --- LEAD MOBILE CARD COMPONENT ---
 interface LeadMobileCardProps {
@@ -254,6 +256,7 @@ export default function AllLeadsTable() {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [whatsappLead, setWhatsappLead] = useState<LeadFormData | null>(null);
   const [isWhatsappOpen, setIsWhatsappOpen] = useState(false);
+  const [isSyncModalOpen, setIsSyncModalOpen] = useState(false);
 
   const handleOpenDetails = (lead: LeadFormData) => {
     setSelectedLead(lead);
@@ -425,6 +428,16 @@ export default function AllLeadsTable() {
       />
 
       <div className="flex justify-end items-center gap-2">
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          onClick={() => setIsSyncModalOpen(true)}
+          className="h-8.5 gap-1.5 px-3 rounded-lg text-xs font-semibold text-green-600 hover:text-green-700 hover:bg-green-500/10 cursor-pointer border-green-500/20 mr-auto"
+        >
+          <FileSpreadsheet className="h-3.5 w-3.5 shrink-0" />
+          Import Google Sheet
+        </Button>
         <Button
           type="button"
           variant={viewMode === "table" ? "secondary" : "outline"}
@@ -618,6 +631,12 @@ export default function AllLeadsTable() {
         lead={whatsappLead}
         isOpen={isWhatsappOpen}
         onClose={() => setIsWhatsappOpen(false)}
+      />
+
+      <GoogleSheetSyncModal
+        isOpen={isSyncModalOpen}
+        onClose={() => setIsSyncModalOpen(false)}
+        onSuccess={refetch}
       />
     </div>
   );

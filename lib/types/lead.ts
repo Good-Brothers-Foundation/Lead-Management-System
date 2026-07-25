@@ -2,6 +2,8 @@ export interface LeadFormData {
   _id?: string;
 
   fullName: string;
+  businessName?: string;
+  leadType?: string;
   phone: string;
   emails?: string[];
   address?: string;

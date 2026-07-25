@@ -117,6 +117,26 @@ export default function LeadInfoSection({
       </h3>
       <div className="grid gap-x-6 gap-y-4 md:grid-cols-2 lg:grid-cols-3">
         <div className="space-y-2">
+          <Label className="text-sm font-medium">Lead Type</Label>
+          <Select
+            onValueChange={(v) => onSelectChange("leadType", v)}
+            value={formData.leadType}
+          >
+            <SelectTrigger id="leadType" className="h-10 bg-card border-input">
+              <SelectValue placeholder="Select Lead Type" />
+            </SelectTrigger>
+            <SelectContent position="popper" sideOffset={4} className="w-[--radix-select-trigger-width]">
+              <SelectItem value="b2b">B2B</SelectItem>
+              <SelectItem value="b2c">B2C</SelectItem>
+              <SelectItem value="individual">Individual</SelectItem>
+              <SelectItem value="government">Government</SelectItem>
+              <SelectItem value="ngo">NGO / Non-Profit</SelectItem>
+              <SelectItem value="other">Other</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
+        <div className="space-y-2">
           <Label className="text-sm font-medium">Service Interested In</Label>
           <Select
             onValueChange={(v) => onSelectChange("service", v)}

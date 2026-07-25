@@ -9,12 +9,42 @@ const getLocalDateString = (date: Date): string => {
 
 export const todayString = () => getLocalDateString(new Date());
 
+const STATUS_ALIASES: Record<string, string> = {
+  new: "new",
+  contacted: "contacted",
+  "follow-up-1": "contacted",
+  "follow-up-2": "contacted",
+  "follow-up-3": "contacted",
+  followup1: "contacted",
+  followup2: "contacted",
+  followup3: "contacted",
+  qualified: "qualified",
+  "meeting-booked": "qualified",
+  proposal: "proposal",
+  "quotation-sent": "proposal",
+  converted: "converted",
+  won: "converted",
+  "closed-won": "converted",
+  unqualified: "unqualified",
+  lost: "unqualified",
+  "closed-lost": "unqualified",
+};
+
 export const normalizeStatus = (status?: string) => {
   const s = status?.trim().toLowerCase();
-  if (!s || s === "—" || !["new", "contacted", "qualified", "proposal", "converted", "unqualified"].includes(s)) {
-    return "new";
+  if (!s || s === "—") {
+    return "unknown";
   }
-  return s;
+
+  const slug = s
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+  if (STATUS_ALIASES[slug]) {
+    return STATUS_ALIASES[slug];
+  }
+
+  return slug || "unknown";
 };
 
 export const getStatusCounts = (leads: LeadFormData[]) =>
